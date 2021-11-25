@@ -11,8 +11,8 @@ import base64
 from io import BytesIO
 
 
-room = " "
-password = " "
+room = ""
+password = ""
 
 print("starting...")
 time.sleep(0.25)

@@ -30,7 +30,7 @@ io.on('connection', function(socket){
   })
 
   socket.on("send", function(message){
-    io.in(rooms[socket.id]).emit("recieve", usernames[socket.id] +" : " + message);
+    io.in(rooms[socket.id]).emit("recieve", usernames[socket.id] +";" + message);
   })
 
   socket.on("recieve", function(message){

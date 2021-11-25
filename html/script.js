@@ -21,6 +21,13 @@ function onload(){
 
   socket.on("recieve", function(message){
     console.log(message);
+    splitM = message.split(";");
+    message = "~~~~~:" + splitM[1];
+    splitD = splitM[1].split("|");
+    if(splitD[0] == "IMAGE"){
+      document.getElementById("image").src ="data:image/jpeg;charset=utf-8;base64," + splitD[1];
+    }
+    else{
     if (messages.length < 9){
       messages.push(message);
       dingSound.currentTime = 0;
@@ -29,6 +36,7 @@ function onload(){
     else{
       messages.shift();
       messages.push(message);
+    }
     }
     for (i = 0; i < messages.length; i++){
         document.getElementById("Message"+i).innerHTML = messages[i];

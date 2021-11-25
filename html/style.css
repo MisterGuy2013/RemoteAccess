@@ -30,3 +30,8 @@ input{
 #Title{
   font-size: 300%;
 }
+
+#image{
+  width:95%;
+  height:auto;
+}
