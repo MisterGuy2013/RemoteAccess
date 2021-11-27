@@ -6,6 +6,8 @@ var chatRoom;
 var dingSound;
 var messages = [];
 var delay = true;
+var sent = [];
+var sentOn = 0;
 
 function onload(){
   socket = io();
@@ -50,6 +52,8 @@ function Connect(){
 }
 
 function Send(){
+  sentOn = 0;
+  sent.unshift(messageInput.value);
   if (delay && messageInput.value.replace(/\s/g, "") != ""){
     delay = false;
     setTimeout(delayReset, 1000);
@@ -61,3 +65,29 @@ function Send(){
 function delayReset(){
   delay = true;
 }
+
+function onKeyDown(e){
+  if(e.keyCode == 13){
+    document.getElementById("SendMessage").click();
+    
+  }
+  else if(e.keyCode == 38){
+    sentOn++;
+    if(sentOn == 1  && sent[0] != messageInput.value){
+    sent.unshift(messageInput.value);
+    }
+    if(sentOn > sent.length - 1){
+      sendOn = sent.length;
+    }
+    messageInput.value = sent[sentOn];
+    console.log(sent)
+  }
+  else if(e.keyCode == 40){
+    sentOn--;
+    if(sentOn < 0){
+      sentOn=0;
+    }
+    messageInput.value = sent[sentOn];
+  }
+}
+document.addEventListener("keydown", onKeyDown)
